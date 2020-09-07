@@ -52,6 +52,5 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/ci_test.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/ci_testVersion.cmake
         DESTINATION ${CMAKE_INSTALL_CMAKEDIR})
 
-
-# enable_testing()
-# add_subdirectory(test)
+enable_testing()
+add_subdirectory(tests)
