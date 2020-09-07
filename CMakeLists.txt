@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
+
 project(ci_test 
         VERSION 0.0.1 
         LANGUAGES CXX)
@@ -14,7 +15,7 @@ add_library(ci_test SHARED ${HEADERS} ${SRCS})
 
 target_include_directories(ci_test
     PUBLIC
-        $<INSTALL_INTERFACE:ci_test>
+        $<INSTALL_INTERFACE:include/ci_test>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
 )
 
@@ -39,17 +40,17 @@ install(EXPORT ci_testTargets DESTINATION ${CMAKE_INSTALL_CMAKEDIR})
 include(CMakePackageConfigHelpers)
 
 write_basic_package_version_file(
-    ${CMAKE_CURRENT_BINARY_DIR}/ci_testVersion.cmake
+    ${CMAKE_CURRENT_BINARY_DIR}/ci_testConfigVersion.cmake
     VERSION ${PROJECT_VERSION}
     COMPATIBILITY ExactVersion)
 
 configure_package_config_file(
-    ${PROJECT_SOURCE_DIR}/cmake/ci_test.cmake.in
-    ${CMAKE_CURRENT_BINARY_DIR}/ci_test.cmake
+    ${PROJECT_SOURCE_DIR}/cmake/ci_testConfig.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/ci_testConfig.cmake
     INSTALL_DESTINATION ${CMAKE_INSTALL_CMAKEDIR})
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/ci_test.cmake
-              ${CMAKE_CURRENT_BINARY_DIR}/ci_testVersion.cmake
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/ci_testConfig.cmake
+              ${CMAKE_CURRENT_BINARY_DIR}/ci_testConfigVersion.cmake
         DESTINATION ${CMAKE_INSTALL_CMAKEDIR})
 
 enable_testing()
