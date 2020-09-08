@@ -18,6 +18,10 @@ matrix:
   #   os: osx
   # Use env to specify PACKAGE_BUILD
 
+env:
+  - PACKAGE_BUILD=ON
+  - PACKAGE_BUILD=OFF
+
 before_install:
   - skip
 
@@ -28,7 +32,7 @@ before_script:
   - skip
 
 script:
-  - mkdir build && cd build && cmake .. && make -j4
+  - mkdir build && cd build && cmake -DPACKAGE_BUILD=${PACKAGE_BUILD} .. && make -j4
   - ctest -j4
 
 # notifications:
