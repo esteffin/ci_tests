@@ -5,9 +5,9 @@ language: cpp
 # branches:
 #   except:
 #     - /.*no[-_]?build.*/
-branches:
-  only:
-  - master
+# branches:
+#   only:
+#   - master
 
 
 matrix:
