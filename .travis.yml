@@ -2,9 +2,13 @@
 language: cpp
 
 # [skip travis] in commit message avoid rebuild
+# branches:
+#   except:
+#     - /.*no[-_]?build.*/
 branches:
-  except:
-    - /.*no[-_]?build.*/
+  only:
+  - master
+
 
 matrix:
   include:
@@ -18,9 +22,9 @@ matrix:
   #   os: osx
   # Use env to specify PACKAGE_BUILD
 
-  - env:
-    - PACKAGE_BUILD=ON
-    - PACKAGE_BUILD=OFF
+  # - env:
+  #   - PACKAGE_BUILD=ON
+  #   - PACKAGE_BUILD=OFF
 
 before_install:
   - skip
