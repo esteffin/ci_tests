@@ -20,17 +20,17 @@ jobs:
   # - name: "MacOS Mojave"
   #   os: osx
   # Use env to specify PACKAGE_BUILD
-  - stage: core_build
-    script: mkdir build && cd build && cmake -DPACKAGE_BUILD=${PACKAGE_BUILD} .. && make -j4
-  - stage: core_test
-    script: ctest -j4
+  # - stage: core_build
+  #   script: mkdir build && cd build && cmake -DPACKAGE_BUILD=${PACKAGE_BUILD} .. && make -j4
+  # - stage: core_test
+  #   script: ctest -j4
   # - env:
   #   - PACKAGE_BUILD=ON
   #   - PACKAGE_BUILD=OFF
 
-stages:
-  - core_build
-  - core_test
+# stages:
+#   - core_build
+#   - core_test
 
 # before_install:
 #   - skip
@@ -41,9 +41,9 @@ stages:
 # before_script:
 #   - skip
 
-# script:
-#   - mkdir build && cd build && cmake -DPACKAGE_BUILD=${PACKAGE_BUILD} .. && make -j4
-#   - ctest -j4
+script:
+  - mkdir build && cd build && cmake -DPACKAGE_BUILD=${PACKAGE_BUILD} .. && make -j4
+  - ctest -j4
 
 # notifications:
 #   email: false
