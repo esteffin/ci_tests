@@ -24,10 +24,13 @@ jobs:
     script: mkdir build && cd build && cmake -DPACKAGE_BUILD=${PACKAGE_BUILD} .. && make -j4
   - stage: core_test
     script: ctest -j4
-
   # - env:
   #   - PACKAGE_BUILD=ON
   #   - PACKAGE_BUILD=OFF
+
+stages:
+  - core_build
+  - core_test
 
 # before_install:
 #   - skip
