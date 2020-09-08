@@ -18,9 +18,9 @@ matrix:
   #   os: osx
   # Use env to specify PACKAGE_BUILD
 
-env:
-  - PACKAGE_BUILD=ON
-  - PACKAGE_BUILD=OFF
+  - env:
+    - PACKAGE_BUILD=ON
+    - PACKAGE_BUILD=OFF
 
 before_install:
   - skip
