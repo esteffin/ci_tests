@@ -21,11 +21,10 @@ matrix:
           - cmake
           # - m4
           # - patchelf
-  - stage: build
+  - stage: build_library
     script:
       - cmake -DPACKAGE_BUILD=OFF -DNTL_DIR="/home/travis/ntl/" -DENABLE_TEST=ON .. 
       - make -j4
-  - stage: test
+  - stage: test_library
     script:
-        - make -j4
         - ctest -j4
