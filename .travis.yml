@@ -21,7 +21,7 @@ matrix:
           - cmake
           # - m4
           # - patchelf
-  # - stage: build_library
+  - stage: build_library
     script:
       - mkdir build && cd build && cmake .. && make -j4
       - ctest -j4
