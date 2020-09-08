@@ -23,8 +23,7 @@ matrix:
           # - patchelf
   # - stage: build_library
     script:
-      - cmake .. 
-      - make -j4
+      - mkdir build && cd build && cmake .. && make -j4
       - ctest -j4
   # - stage: test_library
   #   script:
