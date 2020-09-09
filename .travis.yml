@@ -5,9 +5,9 @@ language: cpp
 # branches:
 #   except:
 #     - /.*no[-_]?build.*/
-branches:
-  only:
-  - master
+# branches:
+#   only:
+#   - master
 
 jobs:
   include:
@@ -17,13 +17,13 @@ jobs:
   - name: "Ubuntu 20.04"
     os: linux
     dist: focal
+# - stage: core_build
+#   script: mkdir build && cd build && cmake -DPACKAGE_BUILD=${PACKAGE_BUILD} .. && make -j4
+# - stage: core_test
+#   script: ctest -j4
   # - name: "MacOS Mojave"
   #   os: osx
   # Use env to specify PACKAGE_BUILD
-  # - stage: core_build
-  #   script: mkdir build && cd build && cmake -DPACKAGE_BUILD=${PACKAGE_BUILD} .. && make -j4
-  # - stage: core_test
-  #   script: ctest -j4
   # - env:
   #   - PACKAGE_BUILD=ON
   #   - PACKAGE_BUILD=OFF
@@ -42,8 +42,21 @@ jobs:
 #   - skip
 
 script:
-  - mkdir build && cd build && cmake -DPACKAGE_BUILD=${PACKAGE_BUILD} .. && make -j4
+  - mkdir build && \
+    cd build && \\
+    cmake -DPACKAGE_BUILD=${PACKAGE_BUILD} -DCMAKE_INSTALL_PREFIX=~/ci_tests_install .. && \
+    make -j4
   - ctest -j4
+  - make install
+  - cd ../example && \
+    mkdir build   && \
+    cd build      && \
+    cmake -Dci_test_DIR=~/ci_tests_install/share/cmake/ci_tests .. && \
+    make -j4
+  - cd ../tests && \
+    bats -t .
+
+
 
 # notifications:
 #   email: false
