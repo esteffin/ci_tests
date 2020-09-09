@@ -42,18 +42,18 @@ jobs:
 #   - skip
 
 script:
-  - mkdir build && \
-    cd build && \\
-    cmake -DPACKAGE_BUILD=${PACKAGE_BUILD} -DCMAKE_INSTALL_PREFIX=~/ci_tests_install .. && \
+  - mkdir build &&
+    cd build &&
+    cmake -DPACKAGE_BUILD=${PACKAGE_BUILD} -DCMAKE_INSTALL_PREFIX=~/ci_tests_install .. &&
     make -j4
   - ctest -j4
   - make install
-  - cd ../example && \
-    mkdir build   && \
-    cd build      && \
-    cmake -Dci_test_DIR=~/ci_tests_install/share/cmake/ci_tests .. && \
+  - cd ../example &&
+    mkdir build   &&
+    cd build      &&
+    cmake -Dci_test_DIR=~/ci_tests_install/share/cmake/ci_tests .. &&
     make -j4
-  - cd ../tests && \
+  - cd ../tests &&
     bats -t .
 
 
