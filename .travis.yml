@@ -9,41 +9,73 @@ language: cpp
 #   only:
 #   - master
 
-env: INSTALL_PREFIX="~/ci_test"
-
 jobs:
   include:
-    - name: "Ubuntu 18.04 lib build"
+    - name: "Ubuntu 18.04 lib build gcc"
       os: linux
       dist: bionic
-      env: PACKAGE_BUILD=ON
-    - name: "Ubuntu 20.04 lib build"
+      compiler: gcc
+      env: INSTALL_PREFIX="~/ci_test" PACKAGE_BUILD=OFF
+    - name: "Ubuntu 20.04 lib build gcc"
       os: linux
       dist: focal
-      env: PACKAGE_BUILD=ON
-    - name: "Ubuntu 18.04 lib build"
+      compiler: gcc
+      env: INSTALL_PREFIX="~/ci_test" PACKAGE_BUILD=OFF
+    - name: "Ubuntu 18.04 lib build clang"
       os: linux
       dist: bionic
-      env: PACKAGE_BUILD=OFF
-    - name: "Ubuntu 20.04 lib build"
+      compiler: clang
+      env: INSTALL_PREFIX="~/ci_test" PACKAGE_BUILD=OFF
+    - name: "Ubuntu 20.04 lib build clang"
       os: linux
       dist: focal
-      env: PACKAGE_BUILD=OFF
-# - stage: core_build
-#   script: mkdir build && cd build && cmake -DPACKAGE_BUILD=${PACKAGE_BUILD} .. && make -j4
-# - stage: core_test
-#   script: ctest -j4
-  # - name: "MacOS Mojave"
-  #   os: osx
-  # Use env to specify PACKAGE_BUILD
-  # - env:
-  #   - PACKAGE_BUILD=ON
-  #   - PACKAGE_BUILD=OFF
+      compiler: clang
+      env: INSTALL_PREFIX="~/ci_test" PACKAGE_BUILD=OFF
+    - name: "Ubuntu 18.04 package build gcc"
+      os: linux
+      dist: bionic
+      compiler: gcc
+      env: INSTALL_PREFIX="~/ci_test" PACKAGE_BUILD=ON
+    - name: "Ubuntu 20.04 package build gcc"
+      os: linux
+      dist: focal
+      compiler: gcc
+      env: INSTALL_PREFIX="~/ci_test" PACKAGE_BUILD=ON
+    - name: "Ubuntu 18.04 package build clang"
+      os: linux
+      dist: bionic
+      compiler: clang
+      env: INSTALL_PREFIX="~/ci_test" PACKAGE_BUILD=ON
+    - name: "Ubuntu 20.04 package build clang"
+      os: linux
+      dist: focal
+      compiler: clang
+      env: INSTALL_PREFIX="~/ci_test" PACKAGE_BUILD=ON
+    - name: "MacOS Mojave lib build"
+      os: osx
+      osx_image: xcode11.3
+      env: INSTALL_PREFIX="~/ci_test" PACKAGE_BUILD=OFF
+    - name: "MacOS Mojave package build"
+      os: osx
+      osx_image: xcode11.3
+      env: INSTALL_PREFIX="~/ci_test" PACKAGE_BUILD=ON
+    - name: "MacOS Catalina lib build"
+      os: osx
+      osx_image: xcode12
+      env: INSTALL_PREFIX="~/ci_test" PACKAGE_BUILD=OFF
+    - name: "MacOS Catalina package build"
+      os: osx
+      osx_image: xcode12
+      env: INSTALL_PREFIX="~/ci_test" PACKAGE_BUILD=ON
+      
 
-# stages:
-#   - core_build
-#   - core_test
+# addons:
+#   apt:
+#   - gcc
 
+#     homebrew
+
+  
 # before_install:
 #   - skip
 

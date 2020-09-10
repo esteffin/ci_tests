@@ -33,7 +33,7 @@ if [[ "${PACKAGE_BUILD}" == "ON" ]]; then
 fi
 
 cmake -Dci_test_DIR="${CMAKE_INSTALL_PREFIX}/share/cmake/ci_test" ..
-make -j4
+make -j4 VERBOSE=1
 cd "${ROOT_DIR}/${CONSUMER_FOLDER}/tests"
 bats -t .
 
