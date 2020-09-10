@@ -22,13 +22,9 @@ PACKAGE_BUILD="${1}"
 CMAKE_INSTALL_PREFIX="${2}"
 ROOT_DIR="$(pwd)"
 
-
-# We assume PACKAGE_BUILD argument to be a valid cmake option
-
-cd "${ROOT_DIR}/build"
-
 mkdir build
 cd build
+# We assume PACKAGE_BUILD argument to be a valid cmake option
 cmake -DPACKAGE_BUILD="${PACKAGE_BUILD}" -DCMAKE_INSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}" -DBUILD_SHARED=ON -DENABLE_TESTS=ON ..
 make -j4
 make install
