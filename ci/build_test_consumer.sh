@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # Copyright (C) 2020 IBM Corp.
 # This program is Licensed under the Apache License, Version 2.0
