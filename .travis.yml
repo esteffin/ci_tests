@@ -54,7 +54,7 @@ jobs:
 script:
   - ./ci/build_install_lib.sh "${PACKAGE_BUILD}" "~/ci_test"
   - ./ci/test_lib.sh "${PACKAGE_BUILD}"
-  - ./ci/build_test_consumer "example" "${PACKAGE_BUILD}" "~/ci_test"
+  - ./ci/build_test_consumer.sh "example" "${PACKAGE_BUILD}" "~/ci_test"
 
 
 
