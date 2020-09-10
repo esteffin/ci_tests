@@ -42,10 +42,7 @@ jobs:
 #   - skip
 
 script:
-  - mkdir build &&
-    cd build &&
-    cmake -DPACKAGE_BUILD=${PACKAGE_BUILD} -DCMAKE_INSTALL_PREFIX=~/ci_tests_install .. &&
-    make -j4
+  - ./ci/build_install_lib.sh OFF "~"
   - ctest -j4
   - make install
   - cd ../example &&
