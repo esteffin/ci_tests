@@ -13,23 +13,28 @@
 
 set -xe
 
-if [ "$#" -ne 2 ]; then
-  echo "Wrong parameter number. Usage ./${0} <PACKAGE_BUILD> <CMAKE_INSTALL_PREFIX>"
+if [ "$#" -ne 3 ]; then
+  echo "Wrong parameter number. Usage ./${0} <CONSUMER_FOLDER> <PACKAGE_BUILD> <CMAKE_INSTALL_PREFIX>"
   exit 1
 fi
 
-PACKAGE_BUILD="${1}"
-CMAKE_INSTALL_PREFIX="${2}"
+CONSUMER_FOLDER="${1}"
+PACKAGE_BUILD="${2}"
+CMAKE_INSTALL_PREFIX="${3}"
 ROOT_DIR="$(pwd)"
 
-
-# We assume PACKAGE_BUILD argument to be a valid cmake option
-
-cd "${ROOT_DIR}/build"
-
+cd "${ROOT_DIR}/${CONSUMER_FOLDER}"
 mkdir build
 cd build
-cmake -DPACKAGE_BUILD="${PACKAGE_BUILD}" -DCMAKE_INSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}" -DBUILD_SHARED=ON -DENABLE_TESTS=ON ..
+
+# This test is quite brittle, but we can assume PACKAGE_BUILD is ON or OFF
+if [[ "${PACKAGE_BUILD}" == "ON" ]]
+  CMAKE_INSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}/ci_test"
+fi
+
+cmake -Dci_test_DIR="${CMAKE_INSTALL_PREFIX}/share/cmake/ci_test" ..
 make -j4
-make install
+cd "${ROOT_DIR}/${CONSUMER_FOLDER}/tests"
+bats -t .
+
 cd "${ROOT_DIR}"

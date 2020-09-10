@@ -54,13 +54,7 @@ jobs:
 script:
   - ./ci/build_install_lib.sh "${PACKAGE_BUILD}" "~/ci_test"
   - ./ci/test_lib.sh "${PACKAGE_BUILD}"
-  - cd ../example &&
-    mkdir build   &&
-    cd build      &&
-    cmake -Dci_test_DIR=~/ci_tests_install/share/cmake/ci_tests .. &&
-    make -j4
-  - cd ../tests &&
-    bats -t .
+  - ./ci/build_test_consumer "example" "${PACKAGE_BUILD}" "~/ci_test"
 
 
 
