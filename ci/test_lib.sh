@@ -24,7 +24,7 @@ ROOT_DIR="$(pwd)"
 cd "${ROOT_DIR}/build"
 
 # This test is quite brittle, but we can assume PACKAGE_BUILD is ON or OFF
-if [ "${PACKAGE_BUILD}" == "ON" ]; then
+if [[ "${PACKAGE_BUILD}" == "ON" ]]; then
   cd "${ROOT_DIR}/build/dependencies/Build/helib_external"
 fi
 
