@@ -9,6 +9,8 @@ language: cpp
 #   only:
 #   - master
 
+env: INSTALL_PREFIX="~/ci_test"
+
 jobs:
   include:
     - name: "Ubuntu 18.04 lib build"
@@ -52,9 +54,9 @@ jobs:
 #   - skip
 
 script:
-  - ./ci/build_install_lib.sh "${PACKAGE_BUILD}" "~/ci_test"
+  - ./ci/build_install_lib.sh "${PACKAGE_BUILD}" "${INSTALL_PREFIX}"
   - ./ci/test_lib.sh "${PACKAGE_BUILD}"
-  - ./ci/build_test_consumer.sh "example" "${PACKAGE_BUILD}" "~/ci_test"
+  - ./ci/build_test_consumer.sh "example" "${PACKAGE_BUILD}" "${INSTALL_PREFIX}"
 
 
 
