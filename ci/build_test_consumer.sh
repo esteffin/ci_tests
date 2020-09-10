@@ -28,7 +28,7 @@ mkdir build
 cd build
 
 # This test is quite brittle, but we can assume PACKAGE_BUILD is ON or OFF
-if [[ "${PACKAGE_BUILD}" == "ON" ]]
+if [[ "${PACKAGE_BUILD}" == "ON" ]]; then
   CMAKE_INSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}/ci_test"
 fi
 
