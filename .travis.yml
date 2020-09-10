@@ -11,12 +11,22 @@ language: cpp
 
 jobs:
   include:
-  - name: "Ubuntu 18.04"
-    os: linux
-    dist: bionic
-  - name: "Ubuntu 20.04"
-    os: linux
-    dist: focal
+    - name: "Ubuntu 18.04 lib build"
+      os: linux
+      dist: bionic
+      env: PACKAGE_BUILD=ON
+    - name: "Ubuntu 20.04 lib build"
+      os: linux
+      dist: focal
+      env: PACKAGE_BUILD=ON
+    - name: "Ubuntu 18.04 lib build"
+      os: linux
+      dist: bionic
+      env: PACKAGE_BUILD=OFF
+    - name: "Ubuntu 20.04 lib build"
+      os: linux
+      dist: focal
+      env: PACKAGE_BUILD=OFF
 # - stage: core_build
 #   script: mkdir build && cd build && cmake -DPACKAGE_BUILD=${PACKAGE_BUILD} .. && make -j4
 # - stage: core_test
@@ -42,9 +52,8 @@ jobs:
 #   - skip
 
 script:
-  - ./ci/build_install_lib.sh OFF "~"
-  - ctest -j4
-  - make install
+  - ./ci/build_install_lib.sh "${PACKAGE_BUILD}" "~/ci_test"
+  - ./ci/test_lib.sh "${PACKAGE_BUILD}"
   - cd ../example &&
     mkdir build   &&
     cd build      &&

@@ -13,19 +13,21 @@
 
 set -xe
 
-if [ "$#" -ne 2 ]; then
-  echo "Wrong parameter number. Usage ./${0} <PACKAGE_BUILD> <CMAKE_INSTALL_PREFIX>"
+if [ "$#" -ne 1 ]; then
+  echo "Wrong parameter number. Usage ./${0} <PACKAGE_BUILD>"
   exit 1
 fi
 
 PACKAGE_BUILD="${1}"
-CMAKE_INSTALL_PREFIX="${2}"
+ROOT_DIR="$(pwd)"
 
-# We assume PACKAGE_BUILD argument to be a valid cmake option
+cd "${ROOT_DIR}/build"
 
-mkdir build
-cd build
-cmake -DPACKAGE_BUILD="${PACKAGE_BUILD}" -DCMAKE_INSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}" -DBUILD_SHARED=ON -DENABLE_TESTS=ON ..
-make -j4
-make install
-cd ..
+# This test is quite brittle, but we can assume PACKAGE_BUILD is ON or OFF
+if [ "${PACKAGE_BUILD}" == "ON" ]; then
+  cd "${ROOT_DIR}/build/dependencies/Build/helib_external"
+fi
+
+ctest --output-on-failure -j4
+
+cd "${ROOT_DIR}"
