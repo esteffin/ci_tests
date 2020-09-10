@@ -19,6 +19,17 @@ include(GNUInstallDirs)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
+option(PACKAGE_BUILD
+       "Download dependencies and build as a self-contained package"
+       OFF)
+
+if (PACKAGE_BUILD)
+    set(CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}/ci_test"
+        CACHE
+        STRING "" 
+        FORCE)
+endif (PACKAGE_BUILD)
+
 set(HEADERS "src/prelude.h")
 set(SRCS    "src/prelude.cpp")
 
@@ -35,7 +46,7 @@ target_compile_options(ci_test
 
 set_target_properties(ci_test
                       PROPERTIES
-                          OUTPUT_NAME "ci_test"
+                          OUTPUT_NAME   "ci_test"
                           PUBLIC_HEADER "${HEADERS}")
 
 install(TARGETS ci_test
