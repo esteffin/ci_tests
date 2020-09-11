@@ -13,10 +13,12 @@
 
 set -xe
 
+cd $HOME
+
 if [ "${PACKAGE_BUILD}" == "OFF" ]; then
   if [ "${TRAVIS_OS_NAME}" == "linux" ]; then
     if [ "${TRAVIS_DIST}" == "bionic" ]; then
-      sudo apt install m4 libgmp-dev
+      sudo apt-get -yq --no-install-suggests --no-install-recommends $(travis_apt_get_options) install m4 libgmp-dev
       curl -O "https://www.shoup.net/ntl/ntl-11.4.3.tar.gz"
       tar --no-same-owner -xf ntl-11.4.3.tar.gz
       cd "$HOME/ntl-11.4.3/src"
@@ -24,14 +26,14 @@ if [ "${PACKAGE_BUILD}" == "OFF" ]; then
       make -j4
       sudo make install
     else
-      sudo apt install libgmp-dev libntl-dev
+      sudo apt-get -yq --no-install-suggests --no-install-recommends $(travis_apt_get_options) install libgmp-dev libntl-dev
     fi
   elif [ "${TRAVIS_OS_NAME}" == "osx" ]; then
     brew install gmp ntl
   fi
 else
   if [ "${TRAVIS_OS_NAME}" == "linux" ]; then
-    sudo apt install patchelf m4
+    sudo apt-get -yq --no-install-suggests --no-install-recommends $(travis_apt_get_options) install patchelf m4
   elif [ "${TRAVIS_OS_NAME}" == "osx" ]; then
     brew install m4
   fi
