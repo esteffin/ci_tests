@@ -69,11 +69,22 @@ jobs:
       env: INSTALL_PREFIX="~/ci_test" PACKAGE_BUILD=ON
       
 
-# addons:
-#   apt:
-#   - gcc
-
-#     homebrew
+addons:
+  apt:
+  - g++
+  - clang
+  - patchelf
+  - m4
+  - cmake
+  - bats
+  - libntl-dev
+  - libgmp-dev
+  homebrew:
+  - m4
+  - cmake
+  - bats-core
+  - ntl
+  - gmp
 
   
 # before_install:
