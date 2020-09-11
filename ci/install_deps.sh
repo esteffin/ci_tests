@@ -13,9 +13,9 @@
 
 set -xe
 
-if [ "${PACKAGE_BUILD}" != "OFF" ]; then
+if [ "${PACKAGE_BUILD}" == "OFF" ]; then
   if [ "${TRAVIS_OS_NAME}" == "linux" ]; then
-    if [ "${TRAVIS_DIST_NAME}" == "bionic" ]; then
+    if [ "${TRAVIS_DIST}" == "bionic" ]; then
       apt install m4 libgmp-dev
       curl -O "https://www.shoup.net/ntl/ntl-11.4.3.tar.gz"
       tar --no-same-owner -xf ntl-11.4.3.tar.gz
