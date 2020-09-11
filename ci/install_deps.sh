@@ -20,18 +20,18 @@ if [ "${PACKAGE_BUILD}" != "OFF" ]; then
       curl -O "https://www.shoup.net/ntl/ntl-11.4.3.tar.gz"
       tar --no-same-owner -xf ntl-11.4.3.tar.gz
       cd "$HOME/ntl-11.4.3/src"
-      ./configure PREFIX=~/ntl SHARED=on NTL_GMP_LIP=on NTL_THREADS=on NTL_THREAD_BOOST=on
+      ./configure SHARED=on NTL_GMP_LIP=on NTL_THREADS=on NTL_THREAD_BOOST=on
       make -j4
-      make install
+      sudo make install
     else
-      apt install libgmp-dev libntl-dev
+      sudo apt install libgmp-dev libntl-dev
     fi
   elif [ "${TRAVIS_OS_NAME}" == "osx" ]; then
     brew install gmp ntl
   fi
 else
   if [ "${TRAVIS_OS_NAME}" == "linux" ]; then
-    apt install patchelf m4
+    sudo apt install patchelf m4
   elif [ "${TRAVIS_OS_NAME}" == "osx" ]; then
     brew install m4
   fi
