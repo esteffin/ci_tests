@@ -96,7 +96,7 @@ install:
 
 script:
   - ./ci/build_install_lib.sh "${PACKAGE_BUILD}" "${INSTALL_PREFIX}"
-  - ./ci/test_lib.sh "${PACKAGE_BUILD}"
+  - ./ci/test_lib.sh
   - ./ci/build_test_consumer.sh "example" "${PACKAGE_BUILD}" "${INSTALL_PREFIX}"
 
 

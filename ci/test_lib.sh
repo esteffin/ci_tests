@@ -13,20 +13,9 @@
 
 set -xe
 
-if [ "$#" -ne 1 ]; then
-  echo "Wrong parameter number. Usage ./${0} <PACKAGE_BUILD>"
-  exit 1
-fi
-
-PACKAGE_BUILD="${1}"
 ROOT_DIR="$(pwd)"
 
 cd "${ROOT_DIR}/build"
-
-# This test is quite brittle, but we can assume PACKAGE_BUILD is ON or OFF
-if [ "${PACKAGE_BUILD}" == "ON" ]; then
-  cd "${ROOT_DIR}/build/dependencies/Build/helib_external"
-fi
 
 ctest --output-on-failure -j4
 
