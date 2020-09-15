@@ -88,16 +88,18 @@ addons:
 # before_install:
 #   - skip
 
-install:
-  - ./ci/install_deps.sh
+# install:
+#   - ./ci/install_deps.sh
 
 # before_script:
 #   - skip
 
 script:
-  - ./ci/build_install_lib.sh "${PACKAGE_BUILD}" "${INSTALL_PREFIX}"
-  - ./ci/test_lib.sh
-  - ./ci/build_test_consumer.sh "example" "${PACKAGE_BUILD}" "${INSTALL_PREFIX}"
+  # - ./ci/build_install_lib.sh "${PACKAGE_BUILD}" "${INSTALL_PREFIX}"
+  # - ./ci/test_lib.sh
+  # - ./ci/build_test_consumer.sh "example" "${PACKAGE_BUILD}" "${INSTALL_PREFIX}"
+  - bats --version
+  - echo $(head /dev/urandom | LC_CTYPE=C tr -dc A-Za-z0-9 | head -c ${1:-8})
 
 
 
