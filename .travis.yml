@@ -90,7 +90,7 @@ addons:
 # activating ccache on MacOS
 before_install:
   - if [ "${TRAVIS_OS_NAME}" == "osx" ]; then 
-        export PATH="/usr/local/opt/ccache/libexec:$PATH"
+        export PATH="/usr/local/opt/ccache/libexec:$PATH";
     fi
 
 # install:
