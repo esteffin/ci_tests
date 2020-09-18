@@ -21,6 +21,11 @@ fi
 PACKAGE_BUILD="${1}"
 CMAKE_INSTALL_PREFIX="${2}"
 ROOT_DIR="$(pwd)"
+TIME_CMD="/usr/bin/time -v "
+
+if [ "${TRAVIS_OS_NAME}" == "osx" ]; then
+  TIME_CMD="???";
+fi
 
 mkdir build
 cd build

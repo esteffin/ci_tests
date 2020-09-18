@@ -22,6 +22,11 @@ CONSUMER_FOLDER="${1}"
 PACKAGE_BUILD="${2}"
 CMAKE_INSTALL_PREFIX="${3}"
 ROOT_DIR="$(pwd)"
+TIME_CMD="/usr/bin/time -v "
+
+if [ "${TRAVIS_OS_NAME}" == "osx" ]; then
+  TIME_CMD="???";
+fi
 
 cd "${ROOT_DIR}/${CONSUMER_FOLDER}"
 mkdir build
