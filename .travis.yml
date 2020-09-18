@@ -104,7 +104,7 @@ script:
   # - ./ci/build_install_lib.sh "${PACKAGE_BUILD}" "${INSTALL_PREFIX}"
   # - ./ci/test_lib.sh
   # - ./ci/build_test_consumer.sh "example" "${PACKAGE_BUILD}" "${INSTALL_PREFIX}"
-  - gcc -march=generic -Q --help=target
+  - gcc -march=native -Q --help=target
 
 
 
