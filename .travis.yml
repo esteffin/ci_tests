@@ -53,6 +53,14 @@ jobs:
       dist: focal
       compiler: clang
       env: INSTALL_PREFIX="~/ci_test" PACKAGE_BUILD=ON
+    - name: "MacOS High Sierra lib build"
+      os: osx
+      osx_image: xcode10.3
+      env: INSTALL_PREFIX="~/ci_test" PACKAGE_BUILD=OFF
+    - name: "MacOS High Sierra package build"
+      os: osx
+      osx_image: xcode10.3
+      env: INSTALL_PREFIX="~/ci_test" PACKAGE_BUILD=ON
     - name: "MacOS Mojave lib build"
       os: osx
       osx_image: xcode11.3
@@ -85,8 +93,8 @@ addons:
     - cmake
     - bats-core
     - ccache
-    - gnu-time
-    # update: true
+    # - gnu-time
+    update: true
 
 # activating ccache on MacOS
 before_install:
