@@ -29,9 +29,8 @@ if [ "${PACKAGE_BUILD}" == "OFF" ]; then
       sudo apt-get -yq --no-install-suggests --no-install-recommends $(travis_apt_get_options) install libgmp-dev libntl-dev
     fi
   elif [ "${TRAVIS_OS_NAME}" == "osx" ]; then
-    brew --version
-    brew install gmp
     brew install ntl
+    ls -lah /usr/local/lib
   fi
 else
   if [ "${TRAVIS_OS_NAME}" == "linux" ]; then
