@@ -102,8 +102,8 @@ before_install:
         export PATH="/usr/local/opt/ccache/libexec:$PATH";
     fi
 
-# install:
-#   - ./ci/install_deps.sh
+install:
+  - ./ci/install_deps.sh
 
 # before_script:
 #   - skip
