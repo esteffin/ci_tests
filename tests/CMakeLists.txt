@@ -17,4 +17,4 @@ add_executable(ci_test_test ${SRCS})
 target_link_libraries(ci_test_test ci_test)
 
 add_test(NAME "ci_test_test" COMMAND ./ci_test_test)
-add_test(NAME "ci_test_test_fail" COMMAND ./ci_test_test asd)
+#add_test(NAME "ci_test_test_fail" COMMAND ./ci_test_test asd)
