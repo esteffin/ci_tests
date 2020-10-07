@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Copyright (C) 2020 IBM Corp.
 # This program is Licensed under the Apache License, Version 2.0
 # (the "License"); you may not use this file except in compliance
@@ -9,12 +11,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License. See accompanying LICENSE file.
 
-set(SRCS "test.cpp")
+set -xe
 
-# Adding the test binary target
-add_executable(ci_test_test ${SRCS})
+if [ "$#" -ne 2 ]; then
+  echo "Wrong parameter number. Usage ./${0} <PACKAGE_BUILD> <CMAKE_INSTALL_PREFIX>"
+  exit 1
+fi
 
-target_link_libraries(ci_test_test ci_test)
+PACKAGE_BUILD="${1}"
+CMAKE_INSTALL_PREFIX="${2}"
+ROOT_DIR="$(pwd)"
+TIME_CMD="/usr/bin/time -v "
 
-add_test(NAME "ci_test_test" COMMAND ./ci_test_test)
-#add_test(NAME "ci_test_test_fail" COMMAND ./ci_test_test asd)
+if [ "${TRAVIS_OS_NAME}" == "osx" ]; then
+  TIME_CMD="???";
+fi
+
+mkdir build
+cd build
+# We assume PACKAGE_BUILD argument to be a valid cmake option
+cmake -DPACKAGE_BUILD="${PACKAGE_BUILD}" -DCMAKE_INSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}" -DBUILD_SHARED=ON -DENABLE_TEST=ON ..
+make -j4 VERBOSE=1
+make install
+cd "${ROOT_DIR}"
