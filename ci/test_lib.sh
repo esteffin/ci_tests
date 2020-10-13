@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Copyright (C) 2020 IBM Corp.
 # This program is Licensed under the Apache License, Version 2.0
 # (the "License"); you may not use this file except in compliance
@@ -9,12 +11,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License. See accompanying LICENSE file.
 
-set(SRCS "test.cpp")
+set -xe
 
-# Adding the test binary target
-add_executable(ci_test_test ${SRCS})
+ROOT_DIR="$(pwd)"
 
-target_link_libraries(ci_test_test ci_test)
+cd "${ROOT_DIR}/build"
 
-add_test(NAME "ci_test_test" COMMAND ./ci_test_test)
-#add_test(NAME "ci_test_test_fail" COMMAND ./ci_test_test asd)
+ctest --output-on-failure -j4
+
+cd "${ROOT_DIR}"
